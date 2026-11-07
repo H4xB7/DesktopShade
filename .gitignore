@@ -1,6 +1,7 @@
 bin/
 obj/
 pkg/
+*.zip
 DesktopShade.exe
 desktopshade.ini
 desktopshade.log

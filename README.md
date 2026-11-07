@@ -21,7 +21,7 @@ Left-click **twice on an empty spot of your desktop** to hide every desktop icon
 
 ## 安装
 
-去 [Releases](../../releases) 下载 `DesktopShade-1.1.zip`，解压后双击 `install.bat`：
+去 [Releases](https://github.com/H4xB7/DesktopShade/releases/latest) 下载 `DesktopShade-1.1.zip`（发布包只放在 Releases，不进版本库），解压后双击 `install.bat`：
 
 - 直接回车 → 装到 `%LOCALAPPDATA%\DesktopShade`
 - 或输入任意路径，例如 `D:\Apps\DesktopShade`（目录会自动建）
