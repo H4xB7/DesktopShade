@@ -1,0 +1,44 @@
+DesktopShade v1.1  ——  双击桌面空白处，收起所有桌面图标，只留壁纸
+
+【怎么装】
+  解压到任意位置，双击 install.bat。它会问你装到哪：
+    直接回车        → 装到默认位置 C:\Users\你的用户名\AppData\Local\DesktopShade
+    输入一个路径    → 装到你说的目录，例如 D:\Apps\DesktopShade（目录不存在会自动建）
+  也可以在命令行指定、跳过提问：  install.bat -Target "D:\Apps\DesktopShade"
+  不需要管理员权限；装在别的用户目录下可能因权限不足而失败，脚本会明确报错。
+  换过一次目录重装没关系：登录自启会自动改成新的 exe，旧目录它不删，你看着办。
+  第一次运行如果 Windows 弹出“已保护你的电脑”，点“更多信息 → 仍要运行”（程序没做数字签名，属正常）。
+
+【怎么用】
+  左键双击桌面空白处          → 隐藏所有桌面图标（只剩壁纸）
+  隐藏状态下再双击桌面空白处   → 放回来
+  隐藏状态下右击桌面           → 一层菜单：显示桌面图标 / Windows 原生菜单 / 显示·隐藏托盘图标 / 退出
+  双击落在图标上不会误触发（程序会判断指针下面有没有图标）
+  被窗口或全屏游戏盖住桌面时，双击不生效 —— 这时候看不见桌面，也就无所谓隐藏
+
+【想改行为】用记事本编辑同目录的 desktopshade.ini，保存后半秒内自动生效，不用重启：
+  autostart=True|False        开机（登录）自启
+  tray=1|0                    要不要托盘图标
+  logclean=3days              日志自动清理间隔，支持 second/minute/hour/day/week/month/year，单复数都行
+  menu_show / menu_native / menu_tray / menu_exit            隐藏态桌面右键菜单四行的显示文字
+  traymenu_state / _hide / _show / _tip / _auto / _selfhide / _quit   托盘右键菜单各行的显示文字
+  菜单文字只改显示、不改功能；menu_tray 留空则自动写成“显示托盘图标/隐藏托盘图标”。值里不要用 # 号。
+
+【命令行（可选）】在该目录下按 Alt+D 之类都行，重点是这几条：
+  DesktopShade.exe --status      看当前状态
+  DesktopShade.exe --hide|--show|--toggle
+  DesktopShade.exe --probe X Y   诊断：在这个屏幕点双击会怎么样、为什么
+  DesktopShade.exe --preview     在鼠标位置弹一次托盘菜单（图标被折叠进溢出区时用）
+  DesktopShade.exe --version     版本号
+  DesktopShade.exe --exit        退出（下次登录仍会自启）
+
+【环境要求】Windows 10 1903+ 或 Windows 11（自带 .NET Framework 4.x，无需另外装东西）
+
+【卸载】双击 uninstall.bat。它会先结束进程、把桌面图标恢复显示、注销自启、再删掉自己所在的目录——
+        装在哪是从注册表里反推的，所以你装在自定义目录也不用告诉它路径；实在反推不到就手动加参数：
+        uninstall.bat -Target "D:\Apps\DesktopShade"
+
+【说明几件事】
+  · 只隐藏图标层窗口，不动壁纸、不动任务栏、不改注册表里的“显示桌面图标”开关，所以随时可以彻底还原。
+  · 隐藏是运行期状态：如果程序被强杀，图标会暂时留在隐藏态 —— 下次启动会自动放回来。
+  · 日志写在同目录 desktopshade.log，超过 256KB 自动滚动，且按 logclean 设定自动删除，不会越攒越大。

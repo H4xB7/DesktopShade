@@ -1,0 +1,9 @@
+bin/
+obj/
+pkg/
+DesktopShade.exe
+desktopshade.ini
+desktopshade.log
+desktopshade.log.old
+*.user
+.vs/
